@@ -1,10 +1,9 @@
-package com.aditya.jobtracker.entitiy;
+package com.aditya.jobtracker.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Entity
 @Table(name = "users")

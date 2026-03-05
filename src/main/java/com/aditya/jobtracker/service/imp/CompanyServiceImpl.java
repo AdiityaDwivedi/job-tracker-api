@@ -1,6 +1,6 @@
 package com.aditya.jobtracker.service.imp;
 
-import com.aditya.jobtracker.entitiy.Company;
+import com.aditya.jobtracker.entity.Company;
 import com.aditya.jobtracker.repository.CompanyRepository;
 import com.aditya.jobtracker.service.CompanyService;
 import org.springframework.stereotype.Service;
