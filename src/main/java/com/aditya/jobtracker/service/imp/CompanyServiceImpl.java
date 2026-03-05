@@ -30,4 +30,9 @@ public class CompanyServiceImpl implements CompanyService {
     public Company getCompanyById(Long id) {
         return companyRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void deleteCompany(Long id) {
+        companyRepository.deleteById(id);
+    }
 }
