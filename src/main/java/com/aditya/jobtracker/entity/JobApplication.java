@@ -1,9 +1,10 @@
 package com.aditya.jobtracker.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 @Entity
 @Setter
@@ -14,9 +15,12 @@ public class JobApplication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String role;
 
-    private String status;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private ApplicationStatus status;
 
     private String appliedDate;
 
@@ -28,7 +32,7 @@ public class JobApplication {
 
     public JobApplication() {}
 
-    public JobApplication(String role, String status, User user, String appliedDate, Company company) {
+    public JobApplication(String role, ApplicationStatus status, User user, String appliedDate, Company company) {
         this.role = role;
         this.status = status;
         this.user = user;
