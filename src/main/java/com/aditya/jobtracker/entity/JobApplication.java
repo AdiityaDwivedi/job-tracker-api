@@ -1,7 +1,9 @@
 package com.aditya.jobtracker.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 @Entity
 @Setter
@@ -32,18 +34,5 @@ public class JobApplication {
         this.user = user;
         this.appliedDate = appliedDate;
         this.company = company;
-    }
-
-    JobApplication updateApplication(Long id, JobApplication jobApplication) {
-        JobApplication existing = jobApplicationRepository.findById(id).orElse(null);
-
-        if(existing != null) {
-            existing.setRole(jobApplication.getRole());
-            existing.setStatus(jobApplication.getStatus());
-            existing.setAppliedDate((jobApplication.getAppliedDate()));
-            return jobApplicationRepository.save(existing);
-        }
-
-        return null;
     }
 }

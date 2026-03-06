@@ -23,8 +23,9 @@ public class JobApplicationController {
     }
 
     @PutMapping("/{id}")
-    public JobApplication updateApplication(@PathVariable Long id, @RequestBody JobApplication jobApplication) {
-        return jobApplication.updateApplication(id, jobApplication);
+    public JobApplication updateApplication(@PathVariable Long id,
+                                            @RequestBody JobApplication jobApplication) {
+        return jobApplicationService.updateApplication(id, jobApplication);
     }
 
     @GetMapping

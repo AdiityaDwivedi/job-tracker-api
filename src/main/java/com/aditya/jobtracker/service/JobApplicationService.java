@@ -14,4 +14,6 @@ public interface JobApplicationService {
 
     void deleteApplication(Long id);
 
+    JobApplication updateApplication(Long id, JobApplication jobApplication);
+
 }
