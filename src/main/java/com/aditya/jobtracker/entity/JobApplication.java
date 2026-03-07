@@ -25,9 +25,11 @@ public class JobApplication {
     private String appliedDate;
 
     @ManyToOne
+    @NotNull
     private User user;
 
     @ManyToOne
+    @NotNull
     private Company company;
 
     public JobApplication() {}
