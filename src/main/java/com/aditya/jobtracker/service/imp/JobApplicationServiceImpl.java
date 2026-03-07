@@ -1,5 +1,6 @@
 package com.aditya.jobtracker.service.imp;
 
+import com.aditya.jobtracker.DTO.JobApplicationDTO;
 import com.aditya.jobtracker.entity.JobApplication;
 import com.aditya.jobtracker.exception.ResourceNotFoundException;
 import com.aditya.jobtracker.repository.JobApplicationRepository;
@@ -28,14 +29,21 @@ public class JobApplicationServiceImpl implements JobApplicationService {
     }
 
     @Override
-    public List<JobApplication> getAllApplications() {
-        return jobApplicationRepository.findAll();
+    public List<JobApplicationDTO> getAllApplications() {
+        return jobApplicationRepository.findAll()
+                .stream()
+                .map(this::convertToDTO)
+                .toList();
     }
 
     @Override
-    public JobApplication getApplicationById(Long id) {
-        return jobApplicationRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Application is not found with id: "+ id));
+    public JobApplicationDTO getApplicationById(Long id) {
+
+        JobApplication application = jobApplicationRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Application not found with id: " + id));
+
+        return convertToDTO(application);
     }
 
     @Override
@@ -46,18 +54,25 @@ public class JobApplicationServiceImpl implements JobApplicationService {
     @Override
     public JobApplication updateApplication(Long id, JobApplication jobApplication) {
 
-        JobApplication existing = jobApplicationRepository.findById(id).orElse(null);
+        JobApplication existing = jobApplicationRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Application not found with id: " + id));
 
-        if(existing != null) {
-            existing.setRole(jobApplication.getRole());
-            existing.setStatus(jobApplication.getStatus());
-            existing.setAppliedDate(jobApplication.getAppliedDate());
+        existing.setRole(jobApplication.getRole());
+        existing.setStatus(jobApplication.getStatus());
+        existing.setAppliedDate(jobApplication.getAppliedDate());
 
-            return jobApplicationRepository.save(existing);
-        }
-
-        return null;
+        return jobApplicationRepository.save(existing);
     }
 
-
+    private JobApplicationDTO convertToDTO(JobApplication application) {
+        return new JobApplicationDTO(
+                application.getId(),
+                application.getRole(),
+                application.getStatus(),
+                application.getAppliedDate(),
+                application.getUser() != null ? application.getUser().getId() : null,
+                application.getCompany() != null ? application.getCompany().getId() : null
+        );
+    }
 }

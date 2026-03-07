@@ -1,5 +1,6 @@
 package com.aditya.jobtracker.controller;
 
+import com.aditya.jobtracker.DTO.JobApplicationDTO;
 import com.aditya.jobtracker.entity.JobApplication;
 import com.aditya.jobtracker.service.JobApplicationService;
 import jakarta.validation.Valid;
@@ -30,12 +31,12 @@ public class JobApplicationController {
     }
 
     @GetMapping
-    public List<JobApplication> getAllApplications() {
+    public List<JobApplicationDTO> getAllApplications() {
         return jobApplicationService.getAllApplications();
     }
 
     @GetMapping("{id}")
-    public JobApplication getApplicationsById(@PathVariable Long id) {
+    public JobApplicationDTO getApplicationsById(@PathVariable Long id) {
         return jobApplicationService.getApplicationById(id);
     }
 

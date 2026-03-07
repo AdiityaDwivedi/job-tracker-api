@@ -1,5 +1,6 @@
 package com.aditya.jobtracker.service;
 
+import com.aditya.jobtracker.DTO.JobApplicationDTO;
 import com.aditya.jobtracker.entity.JobApplication;
 
 import java.util.List;
@@ -8,9 +9,9 @@ public interface JobApplicationService {
 
     JobApplication createApplication(JobApplication jobApplication);
 
-    List<JobApplication> getAllApplications();
+    List<JobApplicationDTO> getAllApplications();
 
-    JobApplication getApplicationById(Long id);
+    JobApplicationDTO getApplicationById(Long id);
 
     void deleteApplication(Long id);
 
