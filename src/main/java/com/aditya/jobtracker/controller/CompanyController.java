@@ -2,6 +2,7 @@ package com.aditya.jobtracker.controller;
 
 import com.aditya.jobtracker.entity.Company;
 import com.aditya.jobtracker.service.CompanyService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class CompanyController {
     }
 
     @PostMapping
-    public Company createCompany(@RequestBody Company company) {
+    public Company createCompany(@Valid @RequestBody Company company) {
         return companyService.createCompany(company);
     }
 

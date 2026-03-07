@@ -3,6 +3,7 @@ package com.aditya.jobtracker.controller;
 
 import com.aditya.jobtracker.entity.User;
 import com.aditya.jobtracker.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@Valid @RequestBody User user) {
         return userService.createUser(user);
     }
 
