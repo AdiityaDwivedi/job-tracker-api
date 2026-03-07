@@ -1,6 +1,7 @@
 package com.aditya.jobtracker.service.imp;
 
 import com.aditya.jobtracker.entity.User;
+import com.aditya.jobtracker.exception.ResourceNotFoundException;
 import com.aditya.jobtracker.repository.UserRepository;
 import com.aditya.jobtracker.service.UserService;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,8 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
     }
 
     @Override

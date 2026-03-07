@@ -1,6 +1,7 @@
 package com.aditya.jobtracker.service.imp;
 
 import com.aditya.jobtracker.entity.JobApplication;
+import com.aditya.jobtracker.exception.ResourceNotFoundException;
 import com.aditya.jobtracker.repository.JobApplicationRepository;
 import com.aditya.jobtracker.service.JobApplicationService;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,8 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 
     @Override
     public JobApplication getApplicationById(Long id) {
-        return jobApplicationRepository.findById(id).orElse(null);
+        return jobApplicationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Application is not found with id: "+ id));
     }
 
     @Override

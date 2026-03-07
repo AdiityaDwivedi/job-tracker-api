@@ -1,6 +1,7 @@
 package com.aditya.jobtracker.service.imp;
 
 import com.aditya.jobtracker.entity.Company;
+import com.aditya.jobtracker.exception.ResourceNotFoundException;
 import com.aditya.jobtracker.repository.CompanyRepository;
 import com.aditya.jobtracker.service.CompanyService;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company getCompanyById(Long id) {
-        return companyRepository.findById(id).orElse(null);
+        return companyRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Company not found with id: " + id));
     }
 
     @Override
